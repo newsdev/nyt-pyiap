@@ -22,7 +22,7 @@ setup(
     author_email='jeremy.bowers@nytimes.com',
     url='https://github.com/newsdev/nyt-pyiap',
     description='Python utility functions and Django/Flask middlewares for validating JWT tokens from Google\'s Identity-Aware Proxy',
-    long_description=read('README.rst'),
+    long_description=read('README.md'),
     packages=('pyiap'),
     entry_points={},
     license="Apache License 2.0",
