@@ -20,7 +20,7 @@ MIDDLEWARE_CLASSES = [
 ```
 
 The `request` object in `views.py` will have two new attributes added:
-* `request.jwt_user_id`: The Gooogle internal ID of the user who has been verified by IAP.
+* `request.jwt_user_id`: The Google internal ID of the user who has been verified by IAP.
 * `request.jwt_user_email`: The email address and email type of the user who has been verified by IAP.
 
 ### Flask
