@@ -28,7 +28,7 @@ setup(
     license="Apache License 2.0",
     keywords='google identity-aware proxy iap jwt',
     install_requires=reqs,
-    classifiers=(
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
@@ -37,5 +37,5 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
-    )
+    ]
 )
