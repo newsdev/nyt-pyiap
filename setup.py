@@ -11,10 +11,9 @@ except ImportError:
 def read(filename):
     return open(os.path.join(os.path.dirname(__file__), filename)).read()
 
-
 setup(
     name='nyt-pyiap',
-    version='0.0.5',
+    version='0.0.6',
     author='Jeremy Bowers',
     author_email='jeremy.bowers@nytimes.com',
     url='https://github.com/newsdev/nyt-pyiap',
@@ -24,14 +23,12 @@ setup(
     entry_points={},
     license="Apache License 2.0",
     keywords='google identity-aware proxy iap jwt',
-    install_requires=['pyjwt', 'requests'],
+    install_requires=['pyjwt', 'requests', 'google', 'google-auth', 'requests_toolbelt'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
     ]

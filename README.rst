@@ -31,8 +31,10 @@ Update your ``settings.py`` file to add the Django middleware.
     ]
 
 The ``request`` object in ``views.py`` will have two new attributes
-added: \* ``request.jwt_user_id``: The Google internal ID of the user
-who has been verified by IAP. \* ``request.jwt_user_email``: The email
+added:
+- ``request.jwt_user_id``: The Google internal ID of the user who
+has been verified by IAP.
+- ``request.jwt_user_email``: The email
 address and email type of the user who has been verified by IAP.
 
 Flask
@@ -47,9 +49,10 @@ application's ``wsgi_app`` with the ``VerifyJWTMiddleware``.
     app.wsgi_app = VerifyJWTMiddleware(app.wsgi_app)
 
 The ``request.environ`` object in ``app.py`` will have two new
-attributes added: \* ``request.environ['jwt_user_id']``: The Google
-internal ID of the user who has been verified by IAP. \*
-``request.environ['jwt_user_email']``: The email address and email type
+attributes added:
+- ``request.environ['jwt_user_id']``: The Google
+internal ID of the user who has been verified by IAP.
+- ``request.environ['jwt_user_email']``: The email address and email type
 of the user who has been verified by IAP.
 
 Contributing
