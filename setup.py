@@ -13,13 +13,13 @@ def read(filename):
 
 setup(
     name='nyt-pyiap',
-    version='0.0.6',
+    version='0.0.7',
     author='Jeremy Bowers',
     author_email='jeremy.bowers@nytimes.com',
     url='https://github.com/newsdev/nyt-pyiap',
     description='Python utility functions and Django/Flask middlewares for validating JWT tokens from Google\'s Identity-Aware Proxy',
     long_description=read('README.rst'),
-    packages=('pyiap','pyiap.middleware', 'pyiap.web'),
+    packages=('pyiap',),
     entry_points={},
     license="Apache License 2.0",
     keywords='google identity-aware proxy iap jwt',
