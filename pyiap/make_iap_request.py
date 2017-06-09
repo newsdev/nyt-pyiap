@@ -1,3 +1,5 @@
+import os
+
 import google.auth
 import google.auth.app_engine
 import google.auth.compute_engine.credentials
