@@ -27,12 +27,4 @@ class VerifyJWTMiddleware(object):
             environ['jwt_user_id'] = response.get('jwt_user_id', None)
             environ['jwt_user_email'] = response.get('jwt_user_email', 'none@none.none')
 
-            if response['error'] == True:
-                payload = "<h1>Error</h1>"
-                payload += "<h5>%s</h5>" % str(response.get('jwt_error_str', 'No error string.'))
-                payload += "Host: %s<br/>Token: %s<br/>" % (host, jwt_token)
-                payload += "<br/>".join(["%s: %s" % (key,value) for key,value in response.items()])
-                payload += "<br/>".join(["%s: %s" % (key,value) for key,value in request.environ.items()])
-                abort(500)
-
         return self.app(environ, start_response)
