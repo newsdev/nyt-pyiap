@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-from pyiap import validate_iap_jwt
+from utils import validate_iap_jwt
 
 
 class VerifyJWTMiddleware(object):
