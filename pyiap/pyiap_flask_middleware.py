@@ -1,7 +1,7 @@
 from flask import abort
 from werkzeug.wrappers import Request
 
-from utils import validate_iap_jwt
+from pyiap.utils import validate_iap_jwt
 
 
 class VerifyJWTMiddleware(object):
@@ -17,7 +17,7 @@ class VerifyJWTMiddleware(object):
         environ['jwt_user_email'] = None
         environ['jwt_error_str'] = None
 
-        host = "%s://%s" % (request.environ.get('HTTP_X_FORWARDED_PROTO', None), request.environ.get('HTTP_HOST', None))
+        host = "https://%s" % request.environ.get('HTTP_HOST', None)
         jwt_token = request.environ.get('HTTP_X_GOOG_AUTHENTICATED_USER_JWT', None)
 
         if host and jwt_token:
