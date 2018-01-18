@@ -18,11 +18,11 @@ def validate_iap_jwt(base_url, iap_jwt):
       (user_id, user_email, error_str).
     """
     try:
+        print("trying to get key id")
         key_id = jwt.get_unverified_header(iap_jwt).get('kid')
         if not key_id:
             return {"jwt_error_str": '** ERROR: no key ID **', "error": True}
         key = get_iap_key(key_id)
-        return{"jwt_error_str:": 'Missing Key, the key id was {}'.format(key_id)}
         decoded_jwt = jwt.decode(
             iap_jwt, key,
             algorithms=['ES256'],
