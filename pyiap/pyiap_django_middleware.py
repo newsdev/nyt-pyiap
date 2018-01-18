@@ -14,7 +14,6 @@ class VerifyJWTMiddleware(MiddlewareMixin):
         Adds attributes to the Django request object so that we can access
         an authenticated user in a view or some other response.
         """
-        print(request.META)
         request.jwt_user_id = None
         request.jwt_user_email = None
         request.jwt_error_str = None

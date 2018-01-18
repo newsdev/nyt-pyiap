@@ -19,6 +19,7 @@ def validate_iap_jwt(base_url, iap_jwt):
     """
     try:
         key_id = jwt.get_unverified_header(iap_jwt).get('kid')
+        """
         if not key_id:
             return {"jwt_error_str": '** ERROR: no key ID **', "error": True}
         key = get_iap_key(key_id)
@@ -27,6 +28,8 @@ def validate_iap_jwt(base_url, iap_jwt):
             algorithms=['ES256'],
             audience=base_url)
         return {"jwt_user_id": decoded_jwt['sub'], "jwt_user_email": decoded_jwt['email'], "error": False}
+        """
+        return {"jwt_error_str": 'Key id found {}'.format(key_id), "error": True}
     except (jwt.exceptions.InvalidTokenError,
             requests.exceptions.RequestException) as e:
         return {"jwt_error_str": '** ERROR: JWT validation error {} **'.format(e), "error": True}
