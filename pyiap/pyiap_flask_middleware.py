@@ -19,13 +19,11 @@ class VerifyJWTMiddleware(object):
         environ['jwt_user_email'] = None
         environ['jwt_error_str'] = None
 
-        cloud_project_number = os.environ.get('CLOUD_PROJECT_NUMBER', None)
-        backend_service_id = os.environ.get('BACKEND_SERVICE_ID', None)
         jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         if cloud_project_number and backend_service_id and jwt_token:
 
-            sub, email, error  = validate_iap_jwt_from_compute_engine(jwt_token, cloud_project_number, backend_service_id)
+            sub, email, error  = validate_iap_jwt_from_compute_engine(jwt_token)
 
             environ['jwt_user_id'] = sub
             environ['jwt_user_email'] = email
