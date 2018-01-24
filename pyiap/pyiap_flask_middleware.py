@@ -33,7 +33,7 @@ class VerifyJWTMiddleware(object):
             if error:
                 payload = "<h1>Error</h1>"
                 payload += "<h5>%s</h5>" % str(error)
-                payload += "Audience: %s<br/>Token: %s<br/>" % (audience, jwt_token)
+                payload += "Project #: %s<br/> Email: <br/>Service ID: %s<br/>Token: %s<br/>" % (cloud_project_number, backend_service_id, jwt_token)
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in response.items()])
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in request.environ.items()])
                 abort(500)
