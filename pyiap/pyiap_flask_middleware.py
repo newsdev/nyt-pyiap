@@ -21,7 +21,7 @@ class VerifyJWTMiddleware(object):
 
         jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
-        if cloud_project_number and backend_service_id and jwt_token:
+        if jwt_token:
 
             sub, email, error  = validate_iap_jwt_from_compute_engine(jwt_token)
 

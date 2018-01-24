@@ -20,7 +20,7 @@ class VerifyJWTMiddleware(object):
 
         # Only modify the response if we're in an environment where IAP is running.
         # This isn't going to work on your local if that's what you expect.
-        if cloud_project_number and backend_service_id and jwt_token:
+        if jwt_token:
 
             # Run the validation step.
             sub, email, error = validate_iap_jwt_from_compute_engine(jwt_token)
