@@ -15,15 +15,15 @@ class VerifyJWTMiddleware(object):
         request.jwt_error_str = None
 
         # Construct the hostname from the protocol and the hostname.
-        host = "%s://%s" % (request.META.get('HTTP_X_FORWARDED_PROTO', None), request.META.get('HTTP_HOST', None))
+        audience = os.environ.get("GOOGLE_CLIENT_ID", None)
         jwt_token = request.META.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         # Only modify the response if we're in an environment where IAP is running.
         # This isn't going to work on your local if that's what you expect.
-        if host and jwt_token:
+        if audience and jwt_token:
 
             # Run the validation step.
-            response = validate_iap_jwt(host, jwt_token)
+            response = validate_iap_jwt(audience, jwt_token)
 
             # If there's an error, bail with a 500 and a big debug page.
             if response['error'] == True:
