@@ -6,27 +6,8 @@ Both of these functions are taken directly from the Google example here:
 https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/iap/validate_jwt.py
 """
 
-def validate_iap_jwt_from_app_engine(iap_jwt, cloud_project_number,
-                                     cloud_project_id):
-    """Validate a JWT passed to your App Engine app by Identity-Aware Proxy.
 
-    Args:
-      iap_jwt: The contents of the X-Goog-IAP-JWT-Assertion header.
-      cloud_project_number: The project *number* for your Google Cloud project.
-          This is returned by 'gcloud projects describe $PROJECT_ID', or
-          in the Project Info card in Cloud Console.
-      cloud_project_id: The project *ID* for your Google Cloud project.
-
-    Returns:
-      (user_id, user_email, error_str).
-    """
-    expected_audience = '/projects/{}/apps/{}'.format(
-        cloud_project_number, cloud_project_id)
-    return _validate_iap_jwt(iap_jwt, expected_audience)
-
-
-def validate_iap_jwt_from_compute_engine(iap_jwt, cloud_project_number,
-                                         backend_service_id):
+def validate_iap_jwt_from_compute_engine(iap_jwt):
     """Validate an IAP JWT for your (Compute|Container) Engine service.
 
     Args:
@@ -42,12 +23,10 @@ def validate_iap_jwt_from_compute_engine(iap_jwt, cloud_project_number,
     Returns:
       (user_id, user_email, error_str).
     """
-    expected_audience = '/projects/{}/global/backendServices/{}'.format(
-        cloud_project_number, backend_service_id)
-    return _validate_iap_jwt(iap_jwt, expected_audience)
+    return _validate_iap_jwt(iap_jwt)
 
 
-def _validate_iap_jwt(iap_jwt, expected_audience):
+def _validate_iap_jwt(iap_jwt):
     try:
         key_id = jwt.get_unverified_header(iap_jwt).get('kid')
         if not key_id:
