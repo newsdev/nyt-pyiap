@@ -17,7 +17,7 @@ class VerifyJWTMiddleware(object):
         request.jwt_error_str = None
 
         # Construct the hostname from the protocol and the hostname.
-        audience = os.environ.get("GOOGLE_CLIENT_ID", None)
+        audience = os.environ.get("GOOGLE_AUDIENCE_ID", None)
         jwt_token = request.META.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         # Only modify the response if we're in an environment where IAP is running.

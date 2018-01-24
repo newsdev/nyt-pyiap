@@ -20,7 +20,7 @@ class VerifyJWTMiddleware(object):
         environ['jwt_error_str'] = None
 
         jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
-        audience = os.environ.get("GOOGLE_CLIENT_ID", None)
+        audience = os.environ.get("GOOGLE_AUDIENCE_ID", None)
 
         if audience and jwt_token:
 
