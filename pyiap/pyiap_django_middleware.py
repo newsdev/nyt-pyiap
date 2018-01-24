@@ -16,7 +16,7 @@ class VerifyJWTMiddleware(object):
 
         # Construct the hostname from the protocol and the hostname.
         host = "%s://%s" % (request.META.get('HTTP_X_FORWARDED_PROTO', None), request.META.get('HTTP_HOST', None))
-        jwt_token = request.META.get('HTTP_X_GOOG_AUTHENTICATED_USER_JWT', None)
+        jwt_token = request.META.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         # Only modify the response if we're in an environment where IAP is running.
         # This isn't going to work on your local if that's what you expect.

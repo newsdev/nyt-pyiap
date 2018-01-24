@@ -18,7 +18,7 @@ class VerifyJWTMiddleware(object):
         environ['jwt_error_str'] = None
 
         host = "https://%s" % request.environ.get('HTTP_HOST', None)
-        jwt_token = request.environ.get('HTTP_X_GOOG_AUTHENTICATED_USER_JWT', None)
+        jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         if host and jwt_token:
 
