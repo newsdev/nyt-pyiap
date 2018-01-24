@@ -16,7 +16,8 @@ class VerifyJWTMiddleware(object):
         request.jwt_user_email = None
         request.jwt_error_str = None
 
-        audience = os.environ.get("GOOGLE_AUDIENCE_ID", None)
+        cloud_project_number = os.environ.get('CLOUD_PROJECT_NUMBER', None)
+        backend_service_id = os.environ.get('BACKEND_SERVICE_ID', None)
         jwt_token = request.META.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
 
         # Only modify the response if we're in an environment where IAP is running.
@@ -24,17 +25,17 @@ class VerifyJWTMiddleware(object):
         if audience and jwt_token:
 
             # Run the validation step.
-            response = validate_iap_jwt(audience, jwt_token)
+            sub, email, error = validate_iap_jwt_from_compute_engine(jwt_token, cloud_project_number, backend_service_id)
 
             # If there's an error, bail with a 500 and a big debug page.
-            if response['error'] == True:
+            if error:
                 payload = "<h1>Error</h1>"
-                payload += "<h5>%s</h5>" % str(response.get('jwt_error_str', 'No error string.'))
+                payload += "<h5>%s</h5>" % str(error)
                 payload += "Audience: %s<br/>Token: %s<br/>" % (audience, jwt_token)
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in response.items()])
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in request.META.items()])
                 return HttpResponse(payload, status=500)
 
             # Assign the ID and email to the request if they exist.
-            request.jwt_user_id = response.get('jwt_user_id', None)
-            request.jwt_user_email = response.get('jwt_user_email', None)
+            request.jwt_user_id = sub
+            request.jwt_user_email = email

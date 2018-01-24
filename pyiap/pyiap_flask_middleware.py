@@ -19,19 +19,20 @@ class VerifyJWTMiddleware(object):
         environ['jwt_user_email'] = None
         environ['jwt_error_str'] = None
 
+        cloud_project_number = os.environ.get('CLOUD_PROJECT_NUMBER', None)
+        backend_service_id = os.environ.get('BACKEND_SERVICE_ID', None)
         jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
-        audience = os.environ.get("GOOGLE_AUDIENCE_ID", None)
 
-        if audience and jwt_token:
+        if cloud_project_number and backend_service_id and jwt_token:
 
-            response = validate_iap_jwt(audience, jwt_token)
+            sub, email, error  = validate_iap_jwt_from_compute_engine(jwt_token, cloud_project_number, backend_service_id)
 
-            environ['jwt_user_id'] = response.get('jwt_user_id', None)
-            environ['jwt_user_email'] = response.get('jwt_user_email', 'none@none.none')
+            environ['jwt_user_id'] = sub
+            environ['jwt_user_email'] = email
 
-            if response['error'] == True:
+            if error:
                 payload = "<h1>Error</h1>"
-                payload += "<h5>%s</h5>" % str(response.get('jwt_error_str', 'No error string.'))
+                payload += "<h5>%s</h5>" % str(error)
                 payload += "Audience: %s<br/>Token: %s<br/>" % (audience, jwt_token)
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in response.items()])
                 payload += "<br/>".join(["%s: %s" % (key,value) for key,value in request.environ.items()])
