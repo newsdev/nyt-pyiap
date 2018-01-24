@@ -17,12 +17,12 @@ class VerifyJWTMiddleware(object):
         environ['jwt_user_email'] = None
         environ['jwt_error_str'] = None
 
-        host = "https://%s" % request.environ.get('HTTP_HOST', None)
         jwt_token = request.environ.get('HTTP_X_GOOG_IAP_JWT_ASSERTION', None)
+        audience = os.environ.get("GOOGLE_CLIENT_ID", None)
 
-        if host and jwt_token:
+        if audience and jwt_token:
 
-            response = validate_iap_jwt(host, jwt_token)
+            response = validate_iap_jwt(audience, jwt_token)
 
             environ['jwt_user_id'] = response.get('jwt_user_id', None)
             environ['jwt_user_email'] = response.get('jwt_user_email', 'none@none.none')
