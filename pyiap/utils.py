@@ -7,6 +7,17 @@ https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/iap/valid
 """
 
 
+options = {
+   'verify_signature': True,
+   'verify_exp': True,
+   'verify_nbf': True,
+   'verify_iat': True,
+   'verify_aud': False,
+   'require_exp': False,
+   'require_iat': False,
+   'require_nbf': False
+}
+
 def validate_iap_jwt_from_compute_engine(iap_jwt):
     """Validate an IAP JWT for your (Compute|Container) Engine service.
 
@@ -34,8 +45,7 @@ def _validate_iap_jwt(iap_jwt):
         key = get_iap_key(key_id)
         decoded_jwt = jwt.decode(
             iap_jwt, key,
-            algorithms=['ES256'],
-            audience="/projects/nytint-stg/global/backendServices/")
+            algorithms=['ES256'], options=options)
         return (decoded_jwt['sub'], decoded_jwt['email'], None)
     except (jwt.exceptions.InvalidTokenError,
             requests.exceptions.RequestException) as e:
