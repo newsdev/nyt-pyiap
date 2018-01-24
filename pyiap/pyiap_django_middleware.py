@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse
 
 from pyiap.utils import validate_iap_jwt
