@@ -55,8 +55,7 @@ def _validate_iap_jwt(iap_jwt, expected_audience):
         key = get_iap_key(key_id)
         decoded_jwt = jwt.decode(
             iap_jwt, key,
-            algorithms=['ES256'],
-            audience=expected_audience)
+            algorithms=['ES256'])
         return (decoded_jwt['sub'], decoded_jwt['email'], None)
     except (jwt.exceptions.InvalidTokenError,
             requests.exceptions.RequestException) as e:
