@@ -3,7 +3,7 @@ import os
 from flask import abort
 from werkzeug.wrappers import Request
 
-from pyiap.utils import validate_iap_jwt
+from pyiap.utils import validate_iap_jwt_from_compute_engine
 
 
 class VerifyJWTMiddleware(object):

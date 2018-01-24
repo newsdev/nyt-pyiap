@@ -2,7 +2,7 @@ import os
 
 from django.http import HttpResponse
 
-from pyiap.utils import validate_iap_jwt
+from pyiap.utils import validate_iap_jwt_from_compute_engine
 
 
 class VerifyJWTMiddleware(object):
