@@ -1,6 +1,4 @@
 import os.path
-from pip.download import PipSession
-from pip.req import parse_requirements
 
 try:
     from setuptools import setup
@@ -13,7 +11,7 @@ def read(filename):
 
 setup(
     name='nyt-pyiap',
-    version='0.1.8',
+    version='0.1.9',
     author='Jeremy Bowers',
     author_email='jeremy.bowers@nytimes.com',
     url='https://github.com/newsdev/nyt-pyiap',
